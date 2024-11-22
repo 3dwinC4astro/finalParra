@@ -17,12 +17,12 @@
                     <h3 class="card-title">Información Personal del Egresado</h3>
                 </div>
                 <div class="card-body">
-                     @if(Auth::user() && Auth::user()->imagen)
-            <img src="data:image/jpeg;base64,{{ base64_encode(Auth::user()->imagen) }}" alt="Imagen de usuario" class="rounded-circle" style="width: 80px; height: 80px; object-fit: cover;">
-        @else
-        <img src="https://green.excertia.com/wp-content/uploads/2020/04/perfil-empty.png" alt="Imagen de usuario" class="rounded-circle" style="width: 80px; height: 80px; object-fit: cover;">
-       
-        @endif
+               @if($user && $user->imagen)
+    <img src="data:image/jpeg;base64,{{ base64_encode($user->imagen) }}" alt="Imagen de usuario" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover;">
+@else
+    <img src="https://green.excertia.com/wp-content/uploads/2020/04/perfil-empty.png" alt="Imagen de usuario" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover;">
+@endif
+
                     <p><strong>Número de Identificación:</strong> {{ $egresado->numero_identificacion }}</p>
                     <p><strong>Nombres:</strong> {{ $user->name }}</p>
                     <p><strong>Dirección:</strong> {{ $egresado->direccion }}</p>
