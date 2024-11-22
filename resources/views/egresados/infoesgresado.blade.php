@@ -10,35 +10,33 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-6">
-            <div class="card shadow mb-3">
+        <!-- Tarjeta de Información Personal -->
+        <div class="col-md-12 mb-4">
+            <div class="card shadow">
                 <div class="card-header bg-primary text-white">
-                    <h3 class="card-title">Información del Egresado</h3>
+                    <h3 class="card-title">Información Personal del Egresado</h3>
                 </div>
                 <div class="card-body">
                     <p><strong>Número de Identificación:</strong> {{ $egresado->numero_identificacion }}</p>
                     <p><strong>Nombres:</strong> {{ $user->name }}</p>
                     <p><strong>Dirección:</strong> {{ $egresado->direccion }}</p>
                     <p><strong>Teléfono:</strong> {{ $egresado->telefono }}</p>
-                    <p><strong>Correo Electrónico:</strong> {{ $user->email }}</p> <!-- Mostrar correo del usuario -->
+                    <p><strong>Correo Electrónico:</strong> {{ $user->email }}</p>
                     <p><strong>Programa Académico:</strong> {{ $egresado->programa_academico }}</p>
                     <p><strong>Fecha de Inicio de Pregrado:</strong> {{ $egresado->fecha_inicio_pregrado }}</p>
                     <p><strong>Fecha de Fin de Pregrado:</strong> {{ $egresado->fecha_fin_pregrado }}</p>
-                    <p><strong>Estado:</strong> 
+                    <p><strong>Estado:</strong>
                         <span class="badge {{ $user->estado == 'activo' ? 'bg-success' : 'bg-danger' }}">
-                            {{ ucfirst($user->estado) }} <!-- Mostrar estado del usuario -->
+                            {{ ucfirst($user->estado) }}
                         </span>
-                   
-                   
-                   
-                   
-
-                   
-                   
-                   
                     </p>
+                </div>
+            </div>
+        </div>
 
-                    <div class="card shadow mb-3">
+        <!-- Tarjeta de Información Laboral -->
+        <div class="col-md-12">
+            <div class="card shadow">
                 <div class="card-header bg-primary text-white">
                     <h3 class="card-title">Información Laboral</h3>
                 </div>
@@ -47,24 +45,18 @@
                         <p>No se encontró información laboral para este egresado.</p>
                     @else
                         @foreach ($infoLaboral as $info)
-                            <p><strong>Nombre de la Empresa:</strong> {{ $info->nombre_empresa }}</p>
-                            <p><strong>Cargo:</strong> {{ $info->cargo }}</p>
-                            <p><strong>Fecha de Inicio:</strong> {{ $info->fecha_inicio }}</p>
-                            <p><strong>Fecha de Finalización:</strong> {{ $info->fecha_finalizacion }}</p>
-                            <p><strong>Nombre del Jefe Inmediato:</strong> {{ $info->nombre_jefe_inmediato }}</p>
-                            <p><strong>Detalles de Contacto:</strong> {{ $info->detalles_contacto }}</p>
-                            <hr> <!-- Línea de separación entre registros -->
+                            <div class="mb-3">
+                                <p><strong>Nombre de la Empresa:</strong> {{ $info->nombre_empresa }}</p>
+                                <p><strong>Cargo:</strong> {{ $info->cargo }}</p>
+                                <p><strong>Fecha de Inicio:</strong> {{ $info->fecha_inicio }}</p>
+                                <p><strong>Fecha de Finalización:</strong> {{ $info->fecha_finalizacion }}</p>
+                                <p><strong>Nombre del Jefe Inmediato:</strong> {{ $info->nombre_jefe_inmediato }}</p>
+                                <p><strong>Detalles de Contacto:</strong> {{ $info->detalles_contacto }}</p>
+                                <hr> <!-- Línea de separación -->
+                            </div>
                         @endforeach
                     @endif
                 </div>
-
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-md-6">
-           
             </div>
         </div>
     </div>
