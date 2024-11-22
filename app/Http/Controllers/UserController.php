@@ -60,18 +60,30 @@ class UserController extends Controller
     }
 
 
-    public function updateImage(Request $request, User $user)
-    {
-        $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-    
-        $path = $request->file('image')->store('avatars', 'public');
-    
-        $user->update([
-            'avatar' => $path,
-        ]);
-    
-        return redirect()->back()->with('success', 'Imagen actualizada correctamente.');
+  public function updateImage(Request $request, $userId)
+{
+    // Validar la imagen cargada
+    $request->validate([
+        'imagen' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
+
+    // Encontrar al usuario
+    $user = User::findOrFail($userId);
+
+    // Verificar si se ha cargado una imagen
+    if ($request->hasFile('imagen')) {
+        // Obtener la imagen cargada
+        $image = $request->file('imagen');
+
+        // Convertir la imagen a formato binario
+        $imageBinary = file_get_contents($image->getRealPath());
+
+        // Guardar o actualizar la imagen en la base de datos
+        $user->imagen = $imageBinary;
+        $user->save();
     }
+
+    // Redirigir con éxito
+    return redirect()->back()->with('success', 'Imagen actualizada correctamente.');
+}
 }
