@@ -58,4 +58,30 @@ class UserController extends Controller
 
         return redirect()->back()->with('success', 'Rol eliminado correctamente.');
     }
+
+
+     public function updateImage(Request $request, $id)
+    {
+        // Validar que el archivo sea una imagen
+        $request->validate([
+            'imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Tamaño máximo 2MB
+        ]);
+
+        // Obtener el usuario
+        $user = Auth::user();
+
+        if ($user->id != $id) {
+            return redirect()->back()->with('error', 'No tienes permiso para actualizar esta imagen.');
+        }
+
+        // Procesar la imagen
+        $imagen = $request->file('imagen');
+        $imagenData = file_get_contents($imagen);
+
+        // Guardar la imagen en la base de datos como BLOB
+        $user->imagen = $imagenData;
+        $user->save();
+
+        return redirect()->back()->with('success', 'Imagen actualizada correctamente.');
+    }
 }
