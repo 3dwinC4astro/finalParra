@@ -60,28 +60,18 @@ class UserController extends Controller
     }
 
 
-     public function updateImage(Request $request, $id)
+    public function updateImage(Request $request, User $user)
     {
-        // Validar que el archivo sea una imagen
         $request->validate([
-            'imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Tamaño máximo 2MB
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
-        // Obtener el usuario
-        $user = Auth::user();
-
-        if ($user->id != $id) {
-            return redirect()->back()->with('error', 'No tienes permiso para actualizar esta imagen.');
-        }
-
-        // Procesar la imagen
-        $imagen = $request->file('imagen');
-        $imagenData = file_get_contents($imagen);
-
-        // Guardar la imagen en la base de datos como BLOB
-        $user->imagen = $imagenData;
-        $user->save();
-
+    
+        $path = $request->file('image')->store('avatars', 'public');
+    
+        $user->update([
+            'avatar' => $path,
+        ]);
+    
         return redirect()->back()->with('success', 'Imagen actualizada correctamente.');
     }
 }
