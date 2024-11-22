@@ -18,9 +18,9 @@
                 </div>
                 <div class="card-body">
                @if($user && $user->imagen)
-    <img src="data:image/jpeg;base64,{{ base64_encode($user->imagen) }}" alt="Imagen de usuario" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover;">
+    <img src="data:image/jpeg;base64,{{ base64_encode($user->imagen) }}" alt="Imagen de usuario" class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover;">
 @else
-    <img src="https://green.excertia.com/wp-content/uploads/2020/04/perfil-empty.png" alt="Imagen de usuario" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover;">
+    <img src="https://green.excertia.com/wp-content/uploads/2020/04/perfil-empty.png" alt="Imagen de usuario" class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover;">
 @endif
 
                     <p><strong>Número de Identificación:</strong> {{ $egresado->numero_identificacion }}</p>
